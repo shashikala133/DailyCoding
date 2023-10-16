@@ -1,0 +1,35 @@
+class Solution {
+    public int majorityElement(int[] arr) {
+        int count = 0;
+        int canditate = 0;
+        for(int num:arr){
+           if(count==0){
+               canditate = num;
+           }
+           if(num == canditate)
+               count+=1;
+           else count-=1;
+        }
+        return canditate;
+    }
+}
+
+
+import java.util.*;
+class Solution {
+    public int majorityElement(int[] arr) {
+        int n=arr.length;
+        Map<Integer,Integer> map=new HashMap<>();
+        for(int i=0;i<arr.length;i++){
+            
+            map.put(arr[i],map.getOrDefault(arr[i],0)+1);
+        }
+         for(Map.Entry<Integer,Integer> it:map.entrySet()){
+             if(it.getValue()>n/2){
+                 return it.getKey();
+             }
+         }
+         return -1;
+    }
+}
+
