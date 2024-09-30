@@ -1,0 +1,37 @@
+Priority Queue
+
+internally it implements min heap where minium value will be stored at the root, it is actually stored in 
+arrayList but we can visualise it as complete binary tree where values are filled from left to right and 
+parents of any node i will be (i-1)/2 and left node will be 2*i+1 and right will be 2*i+2
+
+every time while inserting it will check the root element if the current elemet is lesser than the root it will swap 
+int temp = list.get(first)
+list.set(first,second)
+list.set(second,temp);
+
+4,1,2,6  -->  1, 4, 2, 6
+queue.poll() removes first element i.e 1 then list will be --> 2,4,6 it will perform heapify operations and stores minimum value 
+at the start
+
+if you want reverse this order use comparator
+PriorityQueue<Integer> queue = new PriorityQueue<>(Comparator.reverseOrder()); --> uses maxHeap
+
+
+class Solution {
+    public String frequencySort(String s) {
+      Map<Character,Integer> map=new HashMap<>();
+      for(char c:s.toCharArray()){
+        map.put(c,map.getOrDefault(c,0)+1);
+      }
+      PriorityQueue<Map.Entry<Character,Integer>> pq = new 
+      PriorityQueue<>((a,b)->b.getValue()-a.getValue());
+      pq.addAll(map.entrySet());
+
+     StringBuilder sb=new StringBuilder();
+      while(!pq.isEmpty()){
+        Map.Entry<Character,Integer> entry = pq.poll();
+        sb.append(String.valueOf(entry.getKey()).repeat(entry.getValue()));
+      }
+      return sb.toString();
+    }
+}
