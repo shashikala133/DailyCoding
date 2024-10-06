@@ -1,0 +1,44 @@
+class Solution {
+    public int longestOnes(int[] nums, int k) {
+        int length = 0;
+        int max = 0;
+        for(int i=0;i<nums.length;i++){
+            int numZeros = 0;
+            for(int j=i;j<nums.length;j++){
+                if(nums[j]==0) numZeros++;
+                if(numZeros<=k){
+                   length = j-i+1;
+                   max = Math.max(max,length);
+                }
+                else{break;}
+            }
+        }
+        return max;
+    }
+}
+
+class Solution {
+    public int longestOnes(int[] nums, int k) {
+       int start = 0;
+       int end = 0;
+       int length = 0 ;
+       int max = 0;
+       int zero = 0;
+       while(end<nums.length){
+         if(nums[end]==0) zero++;
+         if(zero<=k){
+            length = end-start+1;
+            max = Math.max(length,max);
+         }else{
+           if(nums[start]==0){
+            zero--;
+           }
+           start++;
+         }
+         end++;
+       }
+       return max;
+       //why this works because we are moving start by one step and we are calculating max length only when 
+       //zeros is less than k it happens only when start is zero
+    }
+}
